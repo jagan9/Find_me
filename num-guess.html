@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>number guessing </title>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+			text-align: center;
+			align-items: center;
+		}
+		body{
+			background-color: lightblue;
+		}
+		#Welcome{
+			padding: 10px;
+			font-size: 3em;
+			text-decoration: underline;
+			color: blue;
+		}
+		#h3{
+			font-family: arial;
+			font-style: italic;
+			font-size: 1.4em;
+		}
+		#h1{
+			padding: 10px;
+
+		}
+		#div1{
+			height:400px;
+			width: 600px;
+			margin: 20px auto;
+			text-align: center;
+			background-color: orange;
+			border-radius: 20px;
+		}
+		#number{
+			height: 40px;
+			width: 300px;
+			padding: 0px;
+			margin: 20px;
+			font-size: 1.7em;
+
+		}
+		#btn{
+			padding: 10px 20px;
+			border-radius: 20px;
+			background-color: red;
+			color: white;
+			border-width: 0;
+			font-size: 1.3em;
+			margin: 10px;
+		}
+		#btn:focus{
+			outline: none;
+		}
+		#btn:hover{
+			background-color: blue;
+		}
+		#h2{
+			padding: 10px;
+		}
+		#gameover{
+			padding: 10px 20px;
+			border-radius: 20px;
+			background-color: red;
+			color: white;
+			border-width: 0;
+			font-size: 1.3em;
+			margin: 10px;
+		}
+		#gameover:focus{
+			outline: none;
+		}
+		#gameover:hover{
+			background-color: blue;
+		}
+		.num:blur{
+			background-color: red;
+
+		}
+
+
+
+
+
+
+
+
+	</style>
+</head>
+<body>
+	<h1 id="Welcome">Welcome to my fourth game.</h1>
+	<h3 id="h3">guess a number between 1 to 100.</h3>
+	<h3 id="h3">You have 10 chances to guess.</h3>
+	<div id="div1"><h1 id="h1">enter your guessing number here...</h1>
+	<input id="number" type="number" name="num"><br>
+	<button id="btn">submit my guess.</button>
+	<h2 id="h2">previous guesses: <span id="displayguesses"></span></h2>
+	<h3>remaining guesses: <span id="remainingguesses">10</span></h3>
+	<h1 id="lowFast"></h1>
+	<button id="gameover" style="display: none;">restart.</button>
+</div>
+
+
+<script>
+	var number=document.getElementById('number');
+	var submitbtn=document.getElementById("btn");
+	var gameover=document.getElementById('gameover');
+	var displayguesses=document.getElementById('displayguesses');
+	var remainingguesses=document.getElementById('remainingguesses');
+	var lowFast=document.getElementById('lowFast');
+	var guesses=10;
+
+
+	submitbtn.addEventListener('click',takenumber);
+
+	var randomnumber=randomnumber1();
+	console.log(randomnumber);
+
+	function randomnumber1(){
+		return Math.ceil(Math.random()*100+1);
+	};
+
+	function takenumber() {
+		if(guesses>0&&randomnumber!=number){
+		number=document.getElementById('number').value;
+		if(number=="" ||number<1||number>100){
+			alert("please guess a number between 1 to 100");
+		}
+		else{
+			guesses--;
+			displayguesses.append(number+" ");
+			remainingguesses.innerHTML=(guesses);
+			displayguess(number);
+		}
+
+		}
+		document.getElementById('number').value="";
+
+	}
+	
+function displayguess(number){
+	if(guesses>0){
+	if(randomnumber==number){
+		lowFast.innerHTML="you won the game."
+		lowFast.style.backgroundColor="green";
+		lowFast.style.color="white";
+		lowFast.style.padding="10px";
+		lowFast.style.margin="10px";
+		gameover.style.display="block";
+		gameover.style.margin="auto";
+		
+	}
+	if(number>randomnumber){
+		lowFast.innerHTML="too high! try agian."
+		lowFast.style.backgroundColor="blue";
+		lowFast.style.color="white";
+		lowFast.style.padding="10px";
+		lowFast.style.margin="10px";
+	}
+	if(number<randomnumber){
+		lowFast.innerHTML="too low! try agian."
+		lowFast.style.backgroundColor="blue";
+		lowFast.style.color="white";
+		lowFast.style.padding="10px";
+		lowFast.style.margin="10px";
+	}
+	}
+	else{
+		lowFast.innerHTML="you lost the game."
+		lowFast.append("number is "+randomnumber);
+		lowFast.style.backgroundColor="red";
+		lowFast.style.color="white";
+		lowFast.style.padding="10px";
+		lowFast.style.margin="10px";
+		gameover.style.display="block";
+		gameover.style.margin="auto";
+		number.addClass('num');
+	}
+}
+
+
+gameover.addEventListener('click',removeall);
+
+function removeall(){
+
+	randomnumber=randomnumber1();
+	console.log(randomnumber);
+	lowFast.innerHTML="";
+	gameover.style.display="none";
+	lowFast.style.padding="0px";
+	displayguesses.innerHTML="";
+	remainingguesses.innerHTML="10";
+	guesses=10;
+}
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
