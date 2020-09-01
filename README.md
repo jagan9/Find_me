@@ -5,4 +5,4 @@ In this you want to guess a number with in 10 chances if you fail to guess a num
 It tells whether you guessed higher and lower ( This simple hint for you ).
 # Live Website
 Hosted on Github Pages.
-[website link](https://jagan9.github.io/Find_Me/)
+[website link](https://jagan9.github.io/Find_me/)
